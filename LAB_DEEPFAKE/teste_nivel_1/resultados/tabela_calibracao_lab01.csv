@@ -1,0 +1,11 @@
+Métrica;Valor
+Maior distância real;0.237
+Menor distância real;0.207
+Média real;0.223
+Desvio padrão real;0.009
+Maior distância DeepLive;0.688
+Menor distância DeepLive;0.662
+Média DeepLive;0.677
+Desvio padrão DeepLive;0.009
+Margem entre classes;0.425
+Threshold definido;0.45

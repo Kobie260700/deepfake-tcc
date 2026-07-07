@@ -1,0 +1,70 @@
+# Ambientes e caches
+.venv/
+venv/
+**/venv/
+**/.venv/
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+
+# Pastas internas do Codex/automacoes locais
+.agents/
+.codex/
+
+# Backups de repositorios internos preservados localmente
+**/.git_disabled_for_parent_repo/
+
+# Builds, downloads e modelos externos pesados
+tmp/
+**/.detector-build/
+**/models/*.onnx
+**/models/*.pth
+**/models/*.safetensors
+**/models/*.pt
+**/models/*.ckpt
+**/weights/
+
+# Configuracoes pequenas dos detectores do monitor devem ser versionadas
+!MONITOR_DEEPFAKE_REUNIOES/models/
+!MONITOR_DEEPFAKE_REUNIOES/models/.gitkeep
+!MONITOR_DEEPFAKE_REUNIOES/models/detector.json
+!MONITOR_DEEPFAKE_REUNIOES/models/effort.json
+
+# Dados locais/sensiveis gerados pelo monitor
+MONITOR_DEEPFAKE_REUNIOES/outputs/*
+!MONITOR_DEEPFAKE_REUNIOES/outputs/.gitkeep
+MONITOR_DEEPFAKE_REUNIOES/profiles/*
+!MONITOR_DEEPFAKE_REUNIOES/profiles/.gitkeep
+MONITOR_DEEPFAKE_REUNIOES/results/*
+!MONITOR_DEEPFAKE_REUNIOES/results/.gitkeep
+
+# Embeddings/encodings biometricos dos laboratorios
+LAB_DEEPFAKE/**/dataset/*.pkl
+
+# Resultados locais da validacao morfologica podem conter metricas pessoais
+VALIDACAO_SEMELHANCA_MORFOLOGICA/resultados/
+
+# Midia e artefatos locais comuns
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.webp
+*.gif
+*.pdf
+
+# Assets demonstrativos pesados do projeto externo
+Deep-Live-Cam/media/
+
+# Logs temporarios
+*.log
+
+# Textos extraidos de PDFs para revisao local
+*_TEXTO_EXTRAIDO.txt

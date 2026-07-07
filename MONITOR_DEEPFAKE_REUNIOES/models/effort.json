@@ -1,0 +1,12 @@
+{
+  "name": "Effort CLIP-L/14 (ICML 2025)",
+  "source": "https://github.com/YZY-stack/Effort-AIGI-Detection",
+  "license": "CC BY-NC 4.0",
+  "python": ".detector-build/effort-venv/Scripts/python.exe",
+  "worker": "tools/effort_worker.py",
+  "repository": ".detector-build/Effort-AIGI-Detection",
+  "checkpoint": "models/effort_faceforensics.pth",
+  "base_model": ".detector-build/models--openai--clip-vit-large-patch14",
+  "timeout_seconds": 180,
+  "max_crops": 4
+}

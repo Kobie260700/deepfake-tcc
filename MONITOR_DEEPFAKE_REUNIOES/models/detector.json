@@ -1,0 +1,14 @@
+{
+  "name": "DFDC EfficientNet-B7 (selimsef)",
+  "source": "https://github.com/selimsef/dfdc_deepfake_challenge",
+  "license": "MIT",
+  "file": "dfdc_efficientnet_b7.onnx",
+  "input_size": [
+    380,
+    380
+  ],
+  "fake_class_index": 0,
+  "normalization": "imagenet",
+  "resize_mode": "letterbox",
+  "output_type": "logit"
+}

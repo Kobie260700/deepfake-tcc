@@ -1,0 +1,26 @@
+data_hora,usuario,fonte_camera,distancia_media,threshold_identidade,movimento_landmarks,variacao_temporal,frames_validos,identidade_valida,liveness_valido,resultado
+2026-06-13 16:04:24.796197,guilherme,webcam_fisica,13.2112,20.21,0.015444,4.8832,10,True,True,ACEITO
+2026-06-13 16:07:42.736057,guilherme,webcam_fisica,12.8332,20.21,0.003822,2.6219,9,True,True,ACEITO
+2026-06-13 16:12:05.607938,guilherme,webcam_fisica,13.6864,20.21,0.004274,2.8953,10,True,True,ACEITO
+2026-06-13 16:24:14.913992,guilherme,webcam_fisica,13.9699,20.21,0.028205,7.0927,10,True,True,ACEITO
+2026-06-13 16:24:47.622969,guilherme,webcam_fisica,14.0447,20.21,0.004477,2.9364,9,True,True,ACEITO
+2026-06-13 16:25:21.416347,guilherme,webcam_fisica,14.2077,20.21,0.003845,2.5203,10,True,True,ACEITO
+2026-06-13 16:27:21.009914,guilherme,webcam_fisica,14.5944,20.21,0.004169,2.9897,10,True,True,ACEITO
+2026-06-13 16:27:58.265882,guilherme,webcam_fisica,14.5958,20.21,0.004006,3.2358,10,True,True,ACEITO
+2026-06-13 16:28:25.291022,guilherme,webcam_fisica,15.6011,20.21,0.004304,3.2436,10,True,True,ACEITO
+2026-06-13 16:29:11.068822,guilherme,webcam_fisica,14.6562,20.21,0.005124,3.3428,10,True,True,ACEITO
+2026-06-13 16:29:53.688203,guilherme,webcam_fisica,14.1814,20.21,0.004898,3.1649,10,True,True,ACEITO
+2026-06-13 16:30:33.707733,guilherme,webcam_fisica,15.1332,20.21,0.005397,3.7387,9,True,True,ACEITO
+2026-06-13 16:31:06.285489,guilherme,webcam_fisica,15.0708,20.21,0.006213,3.8423,10,True,True,ACEITO
+2026-06-13 16:37:55.212422,guilherme,camera_virtual,33.9037,20.21,0.007613,5.289,9,False,True,REJEITADO_IDENTIDADE
+2026-06-13 16:38:32.058838,guilherme,camera_virtual,33.2436,20.21,0.005759,3.7042,10,False,True,REJEITADO_IDENTIDADE
+2026-06-13 16:39:14.016475,guilherme,camera_virtual,33.3211,20.21,0.014883,5.0652,10,False,True,REJEITADO_IDENTIDADE
+2026-06-13 16:39:40.333311,guilherme,camera_virtual,33.2243,20.21,0.006328,4.3237,9,False,True,REJEITADO_IDENTIDADE
+2026-06-13 16:40:16.397716,guilherme,camera_virtual,33.5356,20.21,0.005019,3.0153,10,False,True,REJEITADO_IDENTIDADE
+2026-06-13 16:40:53.390929,guilherme,camera_virtual,33.2119,20.21,0.004646,2.8992,9,False,True,REJEITADO_IDENTIDADE
+2026-06-13 16:42:20.862479,guilherme,camera_virtual,33.8467,20.21,0.003536,2.0757,10,False,True,REJEITADO_IDENTIDADE
+2026-06-13 16:43:05.404267,guilherme,camera_virtual,33.6531,20.21,0.006947,3.7902,10,False,True,REJEITADO_IDENTIDADE
+2026-06-13 16:43:39.999929,guilherme,camera_virtual,33.5564,20.21,0.004098,3.2033,10,False,True,REJEITADO_IDENTIDADE
+2026-06-13 16:44:11.226668,guilherme,camera_virtual,33.5727,20.21,0.004603,3.1398,10,False,True,REJEITADO_IDENTIDADE
+2026-06-13 16:45:34.515644,guilherme,webcam_fisica,15.7476,20.21,0.004416,3.5317,9,True,True,ACEITO
+2026-06-13 17:55:41.625274,guilherme,camera_virtual,33.5984,20.21,0.021882,7.2804,10,False,True,REJEITADO_IDENTIDADE

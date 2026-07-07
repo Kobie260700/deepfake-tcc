@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+outputs/*
+!outputs/.gitkeep
+profiles/*
+!profiles/.gitkeep
+models/*
+!models/.gitkeep
+!models/detector.json
+!models/effort.json
+results/*
+!results/.gitkeep
+.detector-build/

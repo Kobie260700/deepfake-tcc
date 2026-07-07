@@ -1,0 +1,11 @@
+threshold_variacao;aceitacao_real_percentual;rejeicao_deeplive_por_liveness_percentual
+1.0;100.0;0.0
+1.5;100.0;0.0
+2.0;100.0;0.0
+2.5;100.0;10.0
+3.0;70.0;20.0
+
+threshold_identidade_fixo;20.21
+menor_variacao_real;2.5203
+maior_variacao_deeplive;5.289
+sobreposicao_variacao;2.7687
