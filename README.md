@@ -1,96 +1,77 @@
-# DeepFake - Laboratorios e Monitor de Reunioes
+# Contramedidas para ataques de falsificação biométrica em sistemas críticos
 
-Repositorio academico para estudar ataques de deepfake em autenticacao facial e
-propor uma contramedida aplicada a reunioes e entrevistas remotas.
+Pesquisa de conclusão de curso em Engenharia de Computação na UNIFEI sobre ataques de personificação facial com deepfakes em tempo real e contramedidas baseadas em reconhecimento facial e prova de vida. O projeto reúne quatro laboratórios incrementais e uma prova de conceito para acompanhamento de videoconferências.
 
-O projeto foi desenvolvido em etapas:
+**Autor:** Guilherme Silva Teixeira · **Orientador:** Otávio de Souza Martins Gomes · **Data de defesa informada no artigo:** 09/07/2026
 
-1. **LAB01:** reconhecimento facial convencional com `face_recognition`.
-2. **LAB02:** embeddings profundos com `InsightFace buffalo_l`.
-3. **LAB03:** identidade facial combinada com liveness passivo.
-4. **LAB04:** identidade facial combinada com challenge-response ativo.
-5. **Monitor de reunioes:** aplicacao desktop para verificacao continua em
-   Meet, Zoom, Teams, Discord ou outras plataformas de videoconferencia.
-6. **Validacao morfologica:** extracao de proporcoes faciais para orientar a
-   criacao controlada de uma identidade sintetica experimental.
+**[Leia o artigo completo — TCC 02](documentacao/TCC_02.pdf)**
 
-## Estrutura
+## Problema e objetivo
 
-```text
-DeepFake/
-|-- LAB_DEEPFAKE/                    # Laboratorios incrementais de autenticacao
-|-- MONITOR_DEEPFAKE_REUNIOES/        # Ferramenta final de mitigacao
-|-- VALIDACAO_SEMELHANCA_MORFOLOGICA/ # Extracao de metricas morfologicas
-|-- Deep-Live-Cam/                    # Ferramenta usada no cenario ofensivo
-|-- Comandos/                         # Anotacoes de execucao
-|-- ROTEIRO_4_LABS_E_MITIGACAO.md     # Sintese tecnica dos LABs e mitigacao
-`-- ANALISE_INTEGRADA_PROJETO_TCC_APRESENTACAO.md
-```
+A aparência de um participante em uma chamada pode ser manipulada em tempo real para apoiar uma tentativa de personificação. Uma verificação facial pontual não resolve, por si só, o acompanhamento de uma sessão inteira. O trabalho investiga como diferentes camadas de autenticação se comportam diante de um ataque controlado e propõe combinar evidências para apoiar a análise de sessões remotas.
 
-## Monitor de reunioes
+Os objetivos incluem comparar embeddings faciais convencionais e profundos, avaliar liveness passivo e ativo, calibrar limiares no cenário experimental e desenvolver uma prova de conceito de monitoramento contínuo. A contribuição da aplicação está na **integração de técnicas existentes**, não no treinamento de um novo modelo de IA.
 
-A ferramenta principal fica em:
+## Metodologia experimental
 
-```text
-MONITOR_DEEPFAKE_REUNIOES/
-```
+Foi cadastrada uma referência facial legítima e utilizado o DeepLiveCam para simular a personificação com uma identidade sintética escolhida por semelhança morfológica. A etapa preparatória analisou 27 amostras válidas e descartou um quadro de baixa qualidade; as proporções faciais foram usadas para orientar a seleção, não como equivalentes a embeddings de identidade.
 
-Ela executa em paralelo a uma chamada de video e combina:
+Cada laboratório foi avaliado com **20 simulações controladas: 10 com o usuário cadastrado e 10 com a identidade sintética**. Os limiares foram definidos a partir das métricas observadas nessas amostras. Assim, os resultados e limiares descritos abaixo são específicos do experimento e não representam desempenho universal nem validação independente.
 
-- verificacao de identidade por embeddings faciais;
-- detector Effort CLIP-L/14 com baseline por candidato;
-- detector DFDC EfficientNet-B7 como fallback;
-- liveness passivo por variacao temporal e landmarks;
-- filtros de qualidade de imagem;
-- risco instantaneo e acumulado por sessao.
+| Laboratório | Camada investigada | Resultado relatado no artigo |
+| --- | --- | --- |
+| LAB01 | `face_recognition` e distância entre embeddings convencionais | Distâncias de 0,207–0,237 para o usuário real e 0,662–0,688 para o ataque; limiar experimental de 0,45 separou os grupos observados. |
+| LAB02 | InsightFace `buffalo_l` e distância L2 | Maior distância real de 7,893 e menor distância do ataque de 32,527; limiar experimental de 20,210 entre os grupos. |
+| LAB03 | Identidade do LAB02 e variação temporal de landmarks | As faixas de movimento apresentaram sobreposição. A variação temporal foi considerada evidência complementar, sem limiar único definitivo. |
+| LAB04 | Identidade e desafios ativos de movimento | A decisão combinou identidade compatível e sequência válida. O artigo observa que a deepfake reproduziu parte dos movimentos do operador, limitando o valor do desafio isolado. |
 
-Leia o README especifico:
+Os thresholds foram ajustados e avaliados no conjunto experimental descrito no artigo. A separação observada não estabelece taxas generalizáveis de erro nem assegura resistência a outras identidades, ferramentas ou condições de captura.
+
+## Prova de conceito: monitoramento de reuniões
+
+A aplicação desktop é executada em paralelo a chamadas, sem integração oficial com as plataformas. O responsável cadastra uma referência do participante e seleciona uma janela ou região da sessão. A solução avalia periodicamente as imagens e combina sinais para gerar indicadores de risco instantâneo e acumulado.
 
 ```text
-MONITOR_DEEPFAKE_REUNIOES/README.md
+Referência do participante → perfil local e baseline
+Janela da chamada → captura → qualidade e detecção facial
+                  → identidade + sinais de manipulação + liveness
+                  → agregação temporal → resumo para análise humana
 ```
 
-## O que nao esta versionado
+O artigo descreve verificações em ciclos de aproximadamente 30 segundos, com as seguintes camadas:
 
-Por seguranca, privacidade e limite de tamanho do GitHub, o `.gitignore` remove:
+- **Identidade:** embeddings do InsightFace `buffalo_l` comparados à referência por distância L2.
+- **Manipulação:** detector Effort baseado em CLIP-L/14 e detector auxiliar EfficientNet-B7 do DFDC, com execução local via ONNX.
+- **Liveness e qualidade:** variação temporal e landmarks, associados a avaliações de nitidez, iluminação e qualidade da face capturada.
+- **Evolução temporal:** combinação dos sinais ao longo da sessão para evitar conclusões baseadas apenas em um evento isolado.
 
-- ambientes virtuais (`venv`, `.venv`);
-- caches Python;
-- pesos de modelos (`.onnx`, `.pth`, `.safetensors`, etc.);
-- outputs de sessoes;
-- perfis biometricos;
-- embeddings/encodings `.pkl` dos LABs;
-- imagens, videos e PDFs locais;
-- resultados morfologicos pessoais.
+O monitor é uma **prova de conceito de apoio à análise humana**: não apresenta um resultado como prova automática de fraude. O artigo descreve armazenamento local de métricas, embeddings e avaliações, sem gravação de frames ou vídeos por padrão.
 
-Os arquivos pequenos de configuracao dos detectores do monitor sao mantidos:
+Consulte a [documentação específica do monitor](MONITOR_DEEPFAKE_REUNIOES/README.md) para detalhes de configuração, dependências e execução.
+
+## Tecnologias e estrutura
+
+- **Python**, OpenCV, NumPy e Tkinter: processamento de imagens, cálculos e interface desktop.
+- **face_recognition / dlib** e **InsightFace**: extração e comparação de representações faciais.
+- **Effort AIGI Detection**, **EfficientNet-B7 / DFDC** e **ONNX Runtime**: análise complementar de sinais de manipulação.
+- **DeepLiveCam:** simulação controlada de ataque de troca facial.
 
 ```text
-MONITOR_DEEPFAKE_REUNIOES/models/detector.json
-MONITOR_DEEPFAKE_REUNIOES/models/effort.json
+LAB_DEEPFAKE/                    # Quatro laboratórios incrementais
+MONITOR_DEEPFAKE_REUNIOES/       # Prova de conceito e documentação
+VALIDACAO_SEMELHANCA_MORFOLOGICA/ # Seleção experimental da identidade sintética
+Deep-Live-Cam/                   # Ferramenta utilizada no cenário experimental
+documentacao/TCC_02.pdf          # Artigo do trabalho
 ```
 
-Os pesos dos modelos precisam ser obtidos/configurados localmente conforme a
-documentacao do monitor.
+Pesos de modelos, ambientes virtuais, perfis biométricos, resultados de sessões, imagens e vídeos locais não são incluídos por padrão. O artigo disponibilizado neste repositório é uma exceção explícita à regra geral de exclusão de PDFs. Consulte a documentação de cada componente antes de executar os experimentos.
 
-## Execucao do monitor
+## Limitações e próximos passos
 
-Ambiente usado durante os LABs:
+O estudo utilizou um usuário cadastrado, uma identidade sintética e uma ferramenta de troca facial em condições controladas. A calibração foi realizada com amostras do próprio experimento; a validação em população e condições independentes permanece necessária. O trabalho também não reproduz necessariamente as arquiteturas proprietárias de sistemas comerciais.
 
-```powershell
-cd C:\Users\guisi\DeepFake\MONITOR_DEEPFAKE_REUNIOES
-..\LAB_DEEPFAKE\teste_nivel_2\venv\Scripts\python.exe app.py
-```
+Como continuidade, o artigo propõe ampliar participantes, identidades sintéticas, ferramentas, câmeras, iluminação e plataformas; avaliar sessões reais ou simuladas mais diversas; e investigar sinais adicionais, como áudio e voz. Os resultados devem ser interpretados em conjunto com essas limitações.
 
-Testes:
+## Uso responsável
 
-```powershell
-..\LAB_DEEPFAKE\teste_nivel_2\venv\Scripts\python.exe -m unittest discover -s tests -v
-```
-
-## Observacao etica
-
-Este projeto tem finalidade academica e defensiva. A ferramenta de monitoramento
-serve como apoio a decisao humana e nao deve ser tratada como prova automatica
-de fraude. Detectores de deepfake produzem evidencias probabilisticas, que
-dependem de qualidade de imagem, compressao, iluminacao e calibracao.
+O repositório tem finalidade acadêmica e defensiva. Detectores de deepfake fornecem evidências probabilísticas sujeitas a erros, qualidade da imagem e condições de operação; suas saídas não devem ser usadas isoladamente para acusar alguém ou tomar decisões automatizadas sobre pessoas.

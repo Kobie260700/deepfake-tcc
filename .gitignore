@@ -59,6 +59,7 @@ VALIDACAO_SEMELHANCA_MORFOLOGICA/resultados/
 *.webp
 *.gif
 *.pdf
+!documentacao/TCC_02.pdf
 
 # Assets demonstrativos pesados do projeto externo
 Deep-Live-Cam/media/
